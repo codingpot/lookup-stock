@@ -22,7 +22,7 @@ func (h *Hello) onInstallButtonClicked(ctx app.Context, e app.Event) {
 func (h *Hello) Render() app.UI {
 	return app.Div().
 		Body(
-			app.H1().Text("Hello World!"),
+			app.H1().Text("Hello World!!"),
 
 			app.If(h.isAppInstallable,
 				app.Button().
