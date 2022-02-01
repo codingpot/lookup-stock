@@ -7,7 +7,7 @@ import (
 type Hello struct {
 	app.Compo
 
-	//name             string
+	name             string
 	isAppInstallable bool
 }
 
@@ -22,8 +22,22 @@ func (h *Hello) onInstallButtonClicked(ctx app.Context, e app.Event) {
 func (h *Hello) Render() app.UI {
 	return app.Div().
 		Body(
-			app.H1().Text("Hello World!!"),
-
+			app.H1().Body(
+				app.Text("Hello, "),
+				app.If(h.name != "",
+					app.Text(h.name),
+				).Else(
+					app.Text("World!"),
+				),
+			),
+			app.P().Body(
+				app.Input().
+					Type("text").
+					Value(h.name).
+					Placeholder("What is your name?").
+					AutoFocus(true).
+					OnChange(h.ValueTo(&h.name)),
+			),
 			app.If(h.isAppInstallable,
 				app.Button().
 					Text("Install App").
